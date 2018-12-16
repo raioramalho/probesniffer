@@ -3,7 +3,6 @@
 # Created by: Acr4n1us
 # Contact & Changelog: https://github.com/RamalhoSec
 # Bitcoin: 3DppKRbA9Um3z4wnmVtkqnETnvwsip7WkC
-# Version 0.1
 
 
 #::set color palet
@@ -41,6 +40,11 @@ if [ -z "$IFACE" ] ; then
 fi
 #:::::::::::::::::::::::::::::
 
+#::check update
+wget -q -O /tmp/probsniff.checkversion https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
+MIRROR=$(cat /tmp/probsniff.checkversion | grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
+[ $VERSION == $MIRROR ] && echo "You're using release version!" || cp /tmp/probsniff.checkbersion $(pwd)/probsniff.sh 
+#::::::::::::::::::::::::::::
 
 
 #::set global functions
