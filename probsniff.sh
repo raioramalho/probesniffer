@@ -21,6 +21,8 @@ WHITE='\033[01;37m'
 #::set global variables
 DATA=$(/bin/date +%d-%m-%Y)
 OUTFILE="sniff:$DATA.cap"
+CHANNEL_HOP="${CHANNEL_HOP:-0}"
+IFACE="$1"
 
 
 #::verifications for start
