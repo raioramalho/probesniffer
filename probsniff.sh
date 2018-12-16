@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # encoding utf-8
 # Created by: Acr4n1us
 # Contact & Changelog: https://github.com/RamalhoSec
@@ -15,5 +15,17 @@ BLUE='\033[00;34m'
 PURPLE='\033[00;35m'
 CYAN='\033[00;36m'
 WHITE='\033[01;37m'
+#:::::::::::::::::::::::::::::
 
-printf "${RED}Hello\n${RESET}"
+
+#::set global variables
+DATA=$(/bin/date +%d-%m-%Y)
+OUTFILE="sniff:$DATA.cap"
+
+
+#::verifications for start
+#[ "$UID" != "0" ] && { echo $red"Please runt this tool at root!"; exit 1 ;}
+#:::::::::::::::::::::::::::::
+
+#::debug
+printf "${RED}Hello!\n${RESET}"
