@@ -7,9 +7,13 @@
 
 
 #::set color palet
-red='\e[91m'
-green='\e[92m'
-cyan='\e[96m'
-blue='\e[34m'
-yellow='\e[33m'
-end='\e[50m'
+RESET='\033[0m'
+RED='\033[00;31m'
+GREEN='\033[00;32m'
+YELLOW='\033[00;33m'
+BLUE='\033[00;34m'
+PURPLE='\033[00;35m'
+CYAN='\033[00;36m'
+WHITE='\033[01;37m'
+
+printf "${RED}Hello\n${RESET}"
