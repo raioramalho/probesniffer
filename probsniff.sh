@@ -34,7 +34,7 @@ if [ $VERSION == $MIRROR ] ; then
 	printf "${RED}You're using realese version:${BLUE}$VERSION${RESET}\n"
 else
 	printf "${BLUE}Wait, updating this tool..${RESET}\n"
-	cp /tmp/pbsniff.check probsnifff.sh
+	cp /tmp/pbsniff.check probsniff.sh
 	printf "${RED}Ok, restart this tool!${RESET}\n"
 	exit 1 ; 
 fi
