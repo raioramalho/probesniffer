@@ -44,7 +44,8 @@ fi
 
 #::check update
 wget -q -O /tmp/probsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
-MIRROR=$(cat /tmp/probsniff.check | grep "VERSION=" | sed 's/VERSION=//')
+MIRROR=$(cat /tmp/probsniff.check | grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
+VERSION=$(cat probsniff.sh | grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
 [ $VERSION == $MIRROR ] && echo "You're using release version!" || cp /tmp/probsniff.check $DIR/probsniff.sh 
 #::::::::::::::::::::::::::::
 
