@@ -31,9 +31,12 @@ rm -rf /tmp/p*
 wget -q -O /tmp/pbsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
 MIRROR=$(cat /tmp/pbsniff.check | grep "VERSION=" | head -1 | sed 's/VERSION=//' | sed 's/"//g')
 if [ $VERSION == $MIRROR ] ; then
-	printf "s"
+	printf "${RED}You're using realese version: ${BLUE}v:$VERSION${RESET}\n"
 else
-	printf "n"
+	printf "${BLUE}Wait, updating this tool..${RESET}\n"
+	cp /tmp/pbsniff.check probsnifff.sh
+	printf "${RED}Ok, restart this tool!${RESET}\n"
+	exit 1 ; 
 fi
 printf "\n"
 #::::::::::::::::::::::::::::
