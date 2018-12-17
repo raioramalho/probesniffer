@@ -76,6 +76,6 @@ fi
 #:::::::::::::::::::::::::::::::::
 
 #::start prob sniff
-tcpdump -U -v -l -I -i "$IFACE" -e -s 256 type mgt subtype probe-req | awk -f .pbs.conf.awk | tee -a "$OUTPUT" > /dev/null
+nohup tcpdump -U -v -l -I -i "$IFACE" -e -s 256 type mgt subtype probe-req | awk -f .pbs.conf.awk | tee -a "$OUTPUT" &
 tail -f $OUTPUT
 #:::::::::::::::::::::::::::::::::
