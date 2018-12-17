@@ -4,7 +4,6 @@
 # Contact & Changelog: https://github.com/RamalhoSec
 # Bitcoin: 3DppKRbA9Um3z4wnmVtkqnETnvwsip7WkC
 
-clear & printf "\n"
 #::set color palet
 RESET='\033[0m'
 RED='\033[00;31m'
@@ -31,7 +30,7 @@ DIR=$(pwd)
 rm -rf /tmp/pbsniff.check
 wget -q -O /tmp/pbsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
 MIRROR=$(cat /tmp/pbsniff.check | grep "VERSION=" | head -1 | sed 's/VERSION=//' | sed 's/"//g')
-[ $VERSION != $MIRROR ] && printf "${RED}You're using release version: ${GREEN}$VERSION${RESET}" || cp /tmp/pbsniff.check $DIR/probsniff.sh
+[ $VERSION != $MIRROR ] && printf "${RED}You're using release version: ${GREEN}$VERSION${RESET}\n" || cp /tmp/pbsniff.check $DIR/probsniff.sh
 
 
 #set global functions
