@@ -54,7 +54,7 @@ channel_hop() {
 		for CHAN in $IEEE80211bg ; do
 			# echo "switching $IFACE to channel $CHAN"
 			sudo iwconfig $IFACE channel $CHAN
-			sleep 2
+			sleep 1
 		done
 	done
 }
