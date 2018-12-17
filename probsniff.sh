@@ -4,7 +4,7 @@
 # Contact & Changelog: https://github.com/RamalhoSec
 # Bitcoin: 3DppKRbA9Um3z4wnmVtkqnETnvwsip7WkC
 
-
+reset & printf "\n"
 #::set color palet
 RESET='\033[0m'
 RED='\033[00;31m'
