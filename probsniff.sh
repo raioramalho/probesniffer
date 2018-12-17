@@ -30,7 +30,7 @@ DIR=$(pwd)
 rm -rf /tmp/p*
 wget -q -O /tmp/pbsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/README.md
 MIRROR=$(cat /tmp/pbsniff.check | grep "VERSION=" | head -1 | sed 's/VERSION=//' | sed 's/"//g')
-[ $VERSION == $MIRROR ] && printf "${RED}You're using release version: ${BLUE}$VERSION${RESET}\n\n" || rm -rf probsniff.sh ; git pull
+[ $VERSION == $MIRROR ] && printf "${RED}You're using release version: ${BLUE}$VERSION${RESET}\n\n" || rm -rf probsniff.sh ; git pull ; sudo probsniff.sh
 
 
 #set global functions
