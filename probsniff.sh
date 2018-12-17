@@ -32,8 +32,9 @@ wget -q -O /tmp/pbsniff.check https://raw.githubusercontent.com/RamalhoSec/Probs
 rm -rf /tmp/p*
 wget -q -O /tmp/pbsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
 MIRROR=$(cat /tmp/pbsniff.check | grep "VERSION=" | head -1 | sed 's/VERSION=//' | sed 's/"//g')
-[ $VERSION == $MIRROR ] && printf "${RED}You're using release version: ${BLUE}$VERSION${RESET}\n\n" || rm -rf * & git pull
-
+[ $VERSION == $MIRROR ] && printf "${RED}You're using release version: ${BLUE}$VERSION${RESET}\n" || rm -rf * & git pull
+printf "\n"
+#::::::::::::::::::::::::::::
 
 #set global functions
 channel_hop() {
