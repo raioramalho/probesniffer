@@ -17,7 +17,7 @@ WHITE='\033[01;37m'
 
 
 #::set global variables
-VERSION="0.1"
+VERSION="0.2"
 DATA=$(/bin/date +%d-%m-%Y)
 OUTPUT="sniff-$DATA.cap"
 CHANNEL_HOP="${CHANNEL_HOP:-0}"
@@ -68,5 +68,5 @@ fi
 #:::::::::::::::::::::::::::::::::
 
 #::start prob sniff
-tcpdump -v -l -I -i "$IFACE" -e -s 256 type mgt subtype probe-req | awk -f .pbs.conf.awk | tee -a "$OUTPUT" 
+tcpdump -U -v -l -I -i "$IFACE" -e -s 256 type mgt subtype probe-req | awk -f .pbs.conf.awk | tee -a "$OUTPUT" 
 #:::::::::::::::::::::::::::::::::
