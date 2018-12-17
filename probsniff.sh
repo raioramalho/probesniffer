@@ -16,6 +16,12 @@ CYAN='\033[00;36m'
 WHITE='\033[01;37m'
 #:::::::::::::::::::::::::::::
 
+#::check updates
+wget -q -O /tmp/pbsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
+MIRROR=$(cat /tmp/pbsniff.check | grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
+CHECK=$(cat probsniff.sh| grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
+[ $CHECK == $MIRROR ] && echo "You're using release version!" || cp /tmp/pbsniff.check $DIR/probsniff.sh 
+#:::::::::::::::::::::::::::::
 
 #::set global variables
 VERSION="0.1"
@@ -24,35 +30,12 @@ OUTPUT="sniff:$DATA.cap"
 CHANNEL_HOP="${CHANNEL_HOP:-0}"
 IFACE="$1"
 DIR=$(pwd)
-#:::::::::::::::::::::::::::::::
-
-
-#::verifications for start
-#[ "$UID" != "0" ] && { echo $red"Please runt this tool at root!"; exit 1 ;}
-
-
-if ! [ -x "$(command -v gawk)" ]; then
-  echo 'gawk (GNU awk) is not installed. Please install gawk.' >&2
-  exit 1
-fi
-
-if [ -z "$IFACE" ] ; then
-	echo "IFACE env variable must be set. Type \"ifconfig\" to view network interaces."
-	exit 1
-fi
 #:::::::::::::::::::::::::::::
 
-#::check update
-wget -q -O /tmp/probsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
-MIRROR=$(cat /tmp/probsniff.check | grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
-VERSION=$(cat probsniff.sh | grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
-[ $VERSION == $MIRROR ] && echo "You're using release version!" || cp /tmp/probsniff.check $DIR/probsniff.sh 
-#::::::::::::::::::::::::::::
-
-
-#::set global functions
+#set global functions
 channel_hop() {
-  IEEE80211bg="1 2 3 4 5 6 7 8 9 10 11"
+
+	IEEE80211bg="1 2 3 4 5 6 7 8 9 10 11"
 	IEEE80211bg_intl="$IEEE80211b 12 13 14"
 	IEEE80211a="36 40 44 48 52 56 60 64 149 153 157 161"
 	IEEE80211bga="$IEEE80211bg $IEEE80211a"
@@ -67,11 +50,22 @@ channel_hop() {
 	done
 }
 
+if ! [ -x "$(command -v gawk)" ]; then
+  echo 'gawk (GNU awk) is not installed. Please install gawk.' >&2
+  exit 1
+fi
+
+if [ -z "$IFACE" ] ; then
+	echo "IFACE env variable must be set. Type \"ifconfig\" to view network interaces."
+	exit 1
+fi
 
 if [ "$CHANNEL_HOP" -eq 1 ] ; then
 	# channel hop in the background
 	channel_hop &
 fi
+#:::::::::::::::::::::::::::::::::
 
-tcpdump -l -I -i "$IFACE" -e -s 256 type mgt subtype probe-req | awk -f .pbs.conf.awk | tee -a "$OUTPUT" 
-#::::::::::::::::::::::::::::::
+#::start prob sniff
+tcpdump -U -vv -l -I -i "$IFACE" -e -s 256 type mgt subtype probe-req | awk -f .pbs.conf.awk | tee -a "$OUTPUT" 
+#:::::::::::::::::::::::::::::::::
