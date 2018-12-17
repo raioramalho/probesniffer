@@ -16,12 +16,6 @@ CYAN='\033[00;36m'
 WHITE='\033[01;37m'
 #:::::::::::::::::::::::::::::
 
-#::check updates
-wget -q -O /tmp/pbsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
-MIRROR=$(cat /tmp/pbsniff.check | grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
-CHECK=$(cat probsniff.sh| grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
-[ $CHECK == $MIRROR ] && echo "You're using release version!" || cp /tmp/pbsniff.check $DIR/probsniff.sh 
-#:::::::::::::::::::::::::::::
 
 #::set global variables
 VERSION="0.1"
@@ -31,6 +25,14 @@ CHANNEL_HOP="${CHANNEL_HOP:-0}"
 IFACE="$1"
 DIR=$(pwd)
 #:::::::::::::::::::::::::::::
+
+
+#::check updates
+wget -q -O /tmp/pbsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
+MIRROR=$(cat /tmp/pbsniff.check | grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
+[ $VERSION == $MIRROR ] && echo "You're using release version!" || cp /tmp/pbsniff.check $DIR/probsniff.sh 
+#:::::::::::::::::::::::::::::
+
 
 #set global functions
 channel_hop() {
