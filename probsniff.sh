@@ -29,8 +29,6 @@ DIR=$(pwd)
 #::check updates
 rm -rf /tmp/p*
 wget -q -O /tmp/pbsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
-rm -rf /tmp/p*
-wget -q -O /tmp/pbsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
 MIRROR=$(cat /tmp/pbsniff.check | grep "VERSION=" | head -1 | sed 's/VERSION=//' | sed 's/"//g')
 [ $VERSION == $MIRROR ] && printf "${RED}You're using release version: ${BLUE}$VERSION${RESET}\n" || cp /tmp/pbsniff.check probsniff.sh & exit 
 printf "\n"
