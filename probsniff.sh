@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # encoding utf-8
 # Created by: Acr4n1us
 # Contact & Changelog: https://github.com/RamalhoSec
