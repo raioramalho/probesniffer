@@ -17,7 +17,7 @@ WHITE='\033[01;37m'
 
 
 #::set global variables
-VERSION="0.2"
+VERSION="0.1"
 DATA=$(/bin/date +%d-%m-%Y)
 OUTPUT="sniff-$DATA.cap"
 CHANNEL_HOP="${CHANNEL_HOP:-0}"
@@ -30,7 +30,7 @@ DIR=$(pwd)
 rm -rf /tmp/pbsniff.check
 wget -q -O /tmp/pbsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
 MIRROR=$(cat /tmp/pbsniff.check | grep "VERSION=" | head -1 | sed 's/VERSION=//' | sed 's/"//g')
-[ $VERSION == $MIRROR ] && printf "${RED}You're using release version: ${GREEN}$VERSION${RESET}\n" || printf "${BLUE}Please update, new version avaliable!${RESET}\n"
+[ $VERSION == $MIRROR ] && printf "${RED}You're using release version: ${BLUE}$VERSION${RESET}\n\n" || printf "${BLUE}Please update, new version avaliable!${RESET}\n"
 
 
 #set global functions
