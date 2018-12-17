@@ -24,7 +24,6 @@ OUTPUT="sniff:$DATA.cap"
 CHANNEL_HOP="${CHANNEL_HOP:-0}"
 IFACE="$1"
 DIR=$(pwd)
-LOCALVER=$(echo $VERSION | sed 's/VERSION=//' | sed 's/"//g')
 #:::::::::::::::::::::::::::::::
 
 
@@ -45,8 +44,8 @@ fi
 
 #::check update
 wget -q -O /tmp/probsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
-MIRROR=$(cat /tmp/probsniff.check | grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
-[ $LOCALVER == $MIRROR ] && echo "You're using release version!" || cp /tmp/probsniff.check $DIR/probsniff.sh 
+MIRROR=$(cat /tmp/probsniff.check | grep "VERSION=" | sed 's/VERSION=//')
+[ $VERSION == $MIRROR ] && echo "You're using release version!" || cp /tmp/probsniff.check $DIR/probsniff.sh 
 #::::::::::::::::::::::::::::
 
 
