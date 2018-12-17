@@ -30,8 +30,7 @@ DIR=$(pwd)
 #::check updates
 wget -q -O /tmp/pbsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
 MIRROR=$(cat /tmp/pbsniff.check | grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
-[ $VERSION != $MIRROR ] && echo "You're using release version!" || cp /tmp/pbsniff.check $DIR/probsniff.sh 
-#:::::::::::::::::::::::::::::
+[ $VERSION == $MIRROR ] && echo "You're using release version!" || cp /tmp/pbsniff.check $DIR/probsniff.sh
 
 
 #set global functions
