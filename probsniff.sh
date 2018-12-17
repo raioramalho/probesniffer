@@ -23,11 +23,13 @@ DATA=$(/bin/date +%d-%m-%Y)
 OUTFILE="sniff:$DATA.cap"
 CHANNEL_HOP="${CHANNEL_HOP:-0}"
 IFACE="$1"
+DIR=$(pwd)
 #:::::::::::::::::::::::::::::::
 
 
 #::verifications for start
-[ "$UID" != "0" ] && { echo $red"Please runt this tool at root!"; exit 1 ;}
+#[ "$UID" != "0" ] && { echo $red"Please runt this tool at root!"; exit 1 ;}
+
 
 if ! [ -x "$(command -v gawk)" ]; then
   echo 'gawk (GNU awk) is not installed. Please install gawk.' >&2
@@ -41,9 +43,9 @@ fi
 #:::::::::::::::::::::::::::::
 
 #::check update
-wget -q -O /tmp/probsniff.checkversion https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
-MIRROR=$(cat /tmp/probsniff.checkversion | grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
-[ $VERSION == $MIRROR ] && echo "You're using release version!" || cp /tmp/probsniff.checkbersion $(pwd)/probsniff.sh 
+wget -q -O /tmp/probsniff.check https://raw.githubusercontent.com/RamalhoSec/Probsniff/master/probsniff.sh
+MIRROR=$(cat /tmp/probsniff.check | grep "VERSION=" | sed 's/VERSION=//' | sed 's/"//g')
+[ $VERSION == $MIRROR ] && echo "You're using release version!" || cp /tmp/probsniff.check $DIR/probsniff.sh 
 #::::::::::::::::::::::::::::
 
 
