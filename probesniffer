@@ -22,72 +22,72 @@ v_iface="$2"
 
 #::Global Functions
 f_logo() {
-	printf "
-Probesniffer v1.0 (https://gitlab.com/raioramalho/probesniffer)
+    printf "
+    Probesniffer v1.0 (https://gitlab.com/raioramalho/probesniffer)
 
-Scan probe requests from known networks of nearby devices.
-This tool has been translated from Portuguese[br] into English[us].
-I do not take responsibility for your actions.\n"
+    Scan probe requests from known networks of nearby devices.
+    This tool has been translated from Portuguese[br] into English[us].
+    I do not take responsibility for your actions.\n"
 }
 
 
 
 f_help() {
-	printf "
-Usage: probesniffer -i <interface> -o <output file>
-Usage: probesniffer --help
+    printf "
+    Usage: probesniffer -i <interface> -o <output file>
+    Usage: probesniffer --help
 
-Engine Options:
-	-i <>: Specify a wireless interface.
-	-o <>: Specify output file name.
-Global Options:
-	--help <>: Show this help panel.
-	-h <>: Show this help panel too.\n\n"
+    Engine Options:
+    -i <>: Specify a wireless interface.
+    -o <>: Specify output file name.
+    Global Options:
+    --help <>: Show this help panel.
+    -h <>: Show this help panel too.\n\n"
 }
 
 
 f_channel_hop() {
 
-	IEEE80211bg="1 2 3 4 5 6 7 8 9 10 11"
-	IEEE80211bg_intl="$IEEE80211b 12 13 14"
-	IEEE80211a="36 40 44 48 52 56 60 64 149 153 157 161"
-	IEEE80211bga="$IEEE80211bg $IEEE80211a"
-	IEEE80211bga_intl="$IEEE80211bg_intl $IEEE80211a"
+    IEEE80211bg="1 2 3 4 5 6 7 8 9 10 11"
+    IEEE80211bg_intl="$IEEE80211b 12 13 14"
+    IEEE80211a="36 40 44 48 52 56 60 64 149 153 157 161"
+    IEEE80211bga="$IEEE80211bg $IEEE80211a"
+    IEEE80211bga_intl="$IEEE80211bg_intl $IEEE80211a"
 
-	while true ; do
-		for CHAN in $IEEE80211bg ; do
-			# echo "switching $IFACE to channel $CHAN"
-			sudo iwconfig $v_iface channel $CHAN
-			sleep 1
-		done
-done
+    while true ; do
+        for CHAN in $IEEE80211bg ; do
+            # echo "switching $IFACE to channel $CHAN"
+            sudo iwconfig $v_iface channel $CHAN
+            sleep 1
+        done
+    done
 }
 
 
 
 f_sniff() {
-	if [ "$v_channel_hop" -eq 1 ] ; then
-	       f_channel_hop &
-	fi
+    if [ "$v_channel_hop" -eq 1 ] ; then
+        f_channel_hop &
+    fi
 
-	if [ -z "$v_iface" ] ; then
-		printf "\nUse: probesniffer --help\nYou need specify a wireless monitor interface.\n"
-		exit 1
-	fi
+    if [ -z "$v_iface" ] ; then
+        printf "\nUse: probesniffer --help\nYou need specify a wireless monitor interface.\n"
+        exit 1
+    fi
 
-	if [ -z $(iwconfig $v_iface | grep -o "Monitor") ] ; then
- 		printf "\nUse: probesniffer --help\nYou need specify a wireless monitor interface.\n"
-	       	exit 1
-	fi
+    if [ -z $(iwconfig $v_iface | grep -o "Monitor") ] ; then
+        printf "\nUse: probesniffer --help\nYou need specify a wireless monitor interface.\n"
+        exit 1
+    fi
 
-	if [ -z $v_op ] ; then
-		v_output="sniff-$v_date.cap"
-	else
-		v_output="$v_file.cap"
-	fi	
+    if [ -z $v_op ] ; then
+        v_output="sniff-$v_date.cap"
+    else
+        v_output="$v_file.cap"
+    fi	
 
-	printf "\n$(iwconfig $v_iface | grep "Monitor")\n"
-	tcpdump -U -vv -l -I -i $v_iface -e -s 256 type mgt subtype probe-req | awk -f .probesniffer.conf.awk | tee -a "$v_output"
+    printf "\n$(iwconfig $v_iface | grep "Monitor")\n"
+    tcpdump -U -vv -l -I -i $v_iface -e -s 256 type mgt subtype probe-req | awk -f .probesniffer.conf.awk | tee -a "$v_output"
 }
 ##################################################
 
@@ -95,9 +95,9 @@ f_sniff() {
 
 #::Arguments Menu
 case $1 in 
-	--help)f_logo; f_help;;
-	-h)f_logo; f_help;;
-	-i)f_logo ;v_key=$1; v_iface=$2; v_op=$3; v_file=$4; f_sniff;;
-	*)f_logo; f_help;;
+    --help)f_logo; f_help;;
+    -h)f_logo; f_help;;
+    -i)f_logo ;v_key=$1; v_iface=$2; v_op=$3; v_file=$4; f_sniff;;
+    *)f_logo; f_help;;
 esac
 ##################################################
